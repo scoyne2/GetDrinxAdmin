@@ -1,13 +1,13 @@
 ﻿using System;
-
 using LinqToDB.Mapping;
 using MySql.Data.MySqlClient;
 
 namespace GetDrinxAdmin.Models
-{
-    [Table(Name = "Users")]
-    public class User
+{  
+    
+    public partial class User
     {
+
 
         private string _UserID;
         [Column(IsPrimaryKey = true, Storage = "_UserID")]
@@ -24,19 +24,179 @@ namespace GetDrinxAdmin.Models
 
         }
 
-        private string _FullName;
-        [Column(Storage = "_FullName")]
-        public string FullName
+        private string _Email;
+        [Column(Storage = "_Email")]
+        public string Email
         {
             get
             {
-                return this._FullName;
+                return this._Email;
             }
             set
             {
-                this._FullName = value;
+                this._Email = value;
             }
         }
+
+
+        private string _SignInCount;
+        [Column(Storage = "_SignInCount")]
+        public string SignInCount
+        {
+            get
+            {
+                return this._SignInCount;
+            }
+            set
+            {
+                this._SignInCount = value;
+            }
+        }
+
+        private string _LastSignInTime;
+        [Column(Storage = "_LastSignInTime")]
+        public string LastSignInTime
+        {
+            get
+            {
+                return this._LastSignInTime;
+            }
+            set
+            {
+                this._LastSignInTime = value;
+            }
+        }
+
+        private string _LastSignInIP;
+        [Column(Storage = "_LastSignInIP")]
+        public string LastSignInIP
+        {
+            get
+            {
+                return this._LastSignInIP;
+            }
+            set
+            {
+                this._LastSignInIP = value;
+            }
+        }
+
+        private string _CreatedDate;
+        [Column(Storage = "_CreatedDate")]
+        public string CreatedDate
+        {
+            get
+            {
+                return this._CreatedDate;
+            }
+            set
+            {
+                this._CreatedDate = value;
+            }
+        }
+
+        private string _UpdatedDate;
+        [Column(Storage = "_UpdatedDate")]
+        public string UpdatedDate
+        {
+            get
+            {
+                return this._UpdatedDate;
+            }
+            set
+            {
+                this._UpdatedDate = value;
+            }
+        }
+
+
+        private string _FirstName;
+        [Column(Storage = "_FirstName")]
+        public string FirstName
+        {
+            get
+            {
+                return this._FirstName;
+            }
+            set
+            {
+                this._FirstName = value;
+            }
+        }
+
+        private string _LastName;
+        [Column(Storage = "_LastName")]
+        public string LastName
+        {
+            get
+            {
+                return this._LastName;
+            }
+            set
+            {
+                this._LastName = value;
+            }
+        }
+
+        private string _Gender;
+        [Column(Storage = "_Gender")]
+        public string Gender
+        {
+            get
+            {
+                return this._Gender;
+            }
+            set
+            {
+                this._Gender = value;
+            }
+        }
+
+        private string _Status;
+        [Column(Storage = "_Status")]
+        public string Status
+        {
+            get
+            {
+                return this._Status;
+            }
+            set
+            {
+                this._Status = value;
+            }
+        }
+
+
+        private string _Age;
+        [Column(Storage = "_Age")]
+        public string Age
+        {
+            get
+            {
+                return this._Age;
+            }
+            set
+            {
+                this._Age = value;
+            }
+        }
+
+        private string _ProfileDescription;
+        [Column(Storage = "_ProfileDescription")]
+        public string ProfileDescription
+        {
+            get
+            {
+                return this._ProfileDescription;
+            }
+            set
+            {
+                this._ProfileDescription = value;
+            }
+        }
+
+
+
     }
 
 
@@ -76,7 +236,7 @@ namespace GetDrinxAdmin.Models
                 {
                     if (String.IsNullOrEmpty(databaseName))
                         result = false;
-                    string connstring = string.Format("Server=50.112.69.94; database={0}; UID=getdrinxown_usr; password=your password", databaseName);
+                    string connstring = string.Format("Server=IP; Port=PORT; database={0}; UID=USERNAME; password=PASSWORD", databaseName);
                     connection = new MySqlConnection(connstring);
                     connection.Open();
                     result = true;
