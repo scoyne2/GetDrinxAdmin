@@ -25,7 +25,7 @@ namespace GetDrinxAdmin.Controllers
                 while (reader.Read())
                 {
                     // create a new user
-                    User user = new User(); 
+                    User user = new User();
 
                     //store the users data
                     user.UserID = reader.GetString(0);
@@ -37,14 +37,29 @@ namespace GetDrinxAdmin.Controllers
                     user.UpdatedDate = reader.GetString(6);
                     user.FirstName = reader.GetString(7);
                     user.LastName = reader.GetString(8);
-                    user.Gender = reader.GetString(9);
+
+                    if (reader.GetString(9) == "male")
+                    {
+                        user.Gender = "Male";
+                        user.ImageURL = "http://bootdey.com/img/Content/avatar/avatar1.png";
+                    }
+                    else if (reader.GetString(9) == "female")
+                        {
+                        user.Gender = "Female";
+                        user.ImageURL = "http://bootdey.com/img/Content/avatar/avatar3.png";
+                        }
+
                     user.Status = reader.GetString(10);
                     user.Age = reader.GetString(11);
                     user.ProfileDescription = reader.GetString(12) ;
 
+
+
+
                     // add this user to the users list
                     users.Add(user);
                 }
+                reader.Close();
             }
 
 

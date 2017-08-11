@@ -1,6 +1,97 @@
 ﻿
 <body>
 
-home
+    <canvas id="usersChart" width="400" height="200"></canvas>
 
- </body>
+
+</body>
+@section JavaScript
+{
+ <script type="text/javascript">
+
+
+     $(document).ready(function () {
+
+
+         // Add a helper to format timestamp data
+         Date.prototype.formatMMDDYYYY = function () {
+             return (this.getMonth() + 1) +
+                 "/" + this.getDate() +
+                 "/" + this.getFullYear();
+         }
+
+        var labels = [], registrationData = [], loginData = [];
+
+         $.ajax({
+             url: '@Url.Action("GetStats", "Home")',
+             type: "GET",
+             dataType: 'json',
+             success: function (results) {
+                 // alert(JSON.stringify(results));
+                 registrationData = (results.map(function (a) { return parseInt(a.Registrations); }));
+                 loginData = (results.map(function (a) { return parseInt(a.Logins); }));
+                 labels = (results.map(function (a) { return a.Date; }));
+                 renderChart(labels, registrationData, loginData);
+             }
+        });
+
+         function renderChart(labels, data1, data2) {
+             var ctx = document.getElementById("usersChart");
+             var myChart = new Chart(ctx, {
+
+                 type: 'line',
+                 data: {
+                     labels: labels,
+                     datasets: [{
+                         label: "Registrations",
+                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                         borderColor: 'rgba(255, 99, 132, 0.2)',
+                         data: data1,
+                         fill: false,
+                     }, {
+                         label: "Logins",
+                         fill: false,
+                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                         borderColor: 'rgba(54, 162, 235, 0.2)',
+                         data: data2,
+                     }]
+                 },
+
+
+                 options: {
+                     responsive: true,
+                     title: {
+                         display: true,
+                         text: 'User Activity'
+                     },
+                     tooltips: {
+                         mode: 'index',
+                         intersect: false,
+                     },
+                     hover: {
+                         mode: 'nearest',
+                         intersect: true
+                     },
+                     scales: {
+                         xAxes: [{
+                             display: true,
+                             scaleLabel: {
+                                 display: true,
+                                 labelString: 'Month'
+                             }
+                         }],
+                         yAxes: [{
+                             display: true,
+                             scaleLabel: {
+                                 display: true,
+                                 labelString: 'Value'
+                             }
+                         }]
+                     }
+                 }
+             })
+         };
+    });
+
+</script>
+}
