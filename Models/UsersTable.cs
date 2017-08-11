@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using LinqToDB.Mapping;
 using MySql.Data.MySqlClient;
 
@@ -194,7 +194,21 @@ namespace GetDrinxAdmin.Models
                 this._ProfileDescription = value;
             }
         }
+        
 
+        private string _ImageURL;
+        [Column(Storage = "_ImageURL")]
+        public string ImageURL
+        {
+            get
+            {
+                return this._ImageURL;
+            }
+            set
+            {
+                this._ImageURL = value;
+            }
+        }
 
 
     }
@@ -236,7 +250,7 @@ namespace GetDrinxAdmin.Models
                 {
                     if (String.IsNullOrEmpty(databaseName))
                         result = false;
-                    string connstring = string.Format("Server=IP; Port=PORT; database={0}; UID=USERNAME; password=PASSWORD", databaseName);
+                    string connstring = string.Format("Server=IP; Port=PORT; database={0}; UID=USER; password=PASSWORD”, databaseName);
                     connection = new MySqlConnection(connstring);
                     connection.Open();
                     result = true;
